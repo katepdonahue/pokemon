@@ -1,27 +1,37 @@
 # http://bulbapedia.bulbagarden.net/wiki/Diglett
 
 class Diglett
-  attr_accessor :name, :hp, :attack, :defense, :speed, :level, :state
-  attr_reader :birthday
+  attr_accessor :name, :hp, :attack, :defense, :speed, :level, :state, :abilities, :exp
+  attr_reader :birthday, :type, :catch_rate, :entry
 
   def initialize(name)
     @name = name
-    @hp = rand(1..10)
     @attack = rand(5..55)
     @defense = rand(5..25)
     @speed = rand(50..95)
     @level = 1
     @state = "Diglett"
     @birthday = Time.now
+    @type = "Ground"
+    @abilities = ["Scratch", "Sand Attack"]
+    @catch_rate = 0.333
+    @entry = "Diglett. The movement of these Ground Pokémon can be easily detected by their tracks of upturned earth."
+    @hp = 10
+    @exp = 53
   end
 
-  def scratch
+   def level_up
+    if exp > level**3
+      level += 1
+    end
   end
 
-  def sand_attack
+  def gain_exp new_exp
+    exp += new_exp
   end
 
-  def level_up
+  def say_name
+    "#{state}!"
   end
 
   def evolve
@@ -42,5 +52,6 @@ class Diglett
     puts "Level is: #{level}"
     puts "State is: #{state}"
     puts "Age is: #{birthday}"
+    puts entry
   end
 end

@@ -1,24 +1,37 @@
 # http://bulbapedia.bulbagarden.net/wiki/Vanillite_(Pok%C3%A9mon)
 
 class Vanillite
-  attr_accessor :name, :hp, :attack, :defense, :speed, :level, :state
-  attr_reader :birthday
+  attr_accessor :name, :hp, :attack, :defense, :speed, :level, :state, :abilities, :exp
+  attr_reader :birthday, :type, :catch_rate, :entry
 
   def initialize(name)
     @name = name
-    @hp = rand(10..36)
     @attack = rand(10..50)
     @defense = rand(10..50)
     @speed = rand(5..44)
     @level = 1
     @state = "Vanillite"
     @birthday = Time.now
-  end
-
-  def icicle_spear
+    @type = "Ice"
+    @abilities = ["Icicle Spear"]
+    @catch_rate = 0.333
+    @entry = "Vanillite, the Fresh Snow Pokémon. Vanillite's breath is more than fifty degrees below zero when it exhales, creating ice crystals and causing it to snow."
+    @hp = 36
+    @exp = 61
   end
 
   def level_up
+    if exp > level**3
+      level += 1
+    end
+  end
+
+  def gain_exp new_exp
+    exp += new_exp
+  end
+
+  def say_name
+    "#{state}!"
   end
 
   def evolve
